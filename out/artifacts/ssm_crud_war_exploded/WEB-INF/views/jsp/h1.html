@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oP = document.getElementsByTagName("p")[0];
+            var aInput = document.getElementsByTagName("input");
+            var aSpan = document.getElementsByTagName("span");
+            var str = oP.innerHTML;
+            var content = '';
+
+            for (var i = 0; i < str.length; i++) {
+                content += '<span>' + str.charAt(i) + '</span>';
+            }
+            oP.innerHTML = content;
+
+            aInput[1].onclick = function () {
+                var val = aInput[0].value;
+                var arr = [];
+                var num = -1;
+
+                function findNum() {
+                    num = str.indexOf(val, num + 1);
+                    if (num != -1) {
+                        arr.push(num);
+                        findNum();
+                    }
+                }
+
+                function change(index) {
+                    for (var i = 0; i < val.length; i++) {
+                        aSpan[index + i].style.background = "yellow";
+                    }
+                }
+
+                findNum();
+
+
+                for (var i = 0; i < aSpan.length; i++) {
+                    aSpan[i].style.background = '';
+                }
+
+                for (var i = 0; i < arr.length; i++) {
+                    change(arr[i]);
+                }
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+<input type="text" id="text1"><input type="button" id="button1" value="查找">
+<p>app add aoo</p>
+</body>
+</html>
